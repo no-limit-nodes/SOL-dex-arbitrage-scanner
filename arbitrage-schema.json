@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Rish0x29/solana-dex-arbitrage-scanner/blob/main/arbitrage-schema.json",
+  "title": "Solana DEX Arbitrage Data",
+  "description": "Normalized DEX quotes and derived arbitrage candidates observed through NLN-connected Solana data pipelines.",
+  "oneOf": [
+    {
+      "title": "DEX quote",
+      "type": "object",
+      "required": ["venue", "base_mint", "quote_mint", "bid", "ask", "observed_slot"],
+      "properties": {
+        "venue": {"type": "string"},
+        "pool": {"type": ["string", "null"]},
+        "base_mint": {"type": "string"},
+        "quote_mint": {"type": "string"},
+        "bid": {"type": "number", "exclusiveMinimum": 0},
+        "ask": {"type": "number", "exclusiveMinimum": 0},
+        "fee_bps": {"type": "number", "minimum": 0},
+        "observed_slot": {"type": "integer", "minimum": 0},
+        "source": {"type": "string", "default": "nln-rpc"}
+      },
+      "additionalProperties": true
+    },
+    {
+      "title": "Arbitrage opportunity",
+      "type": "object",
+      "required": ["buy_venue", "sell_venue", "net_edge_bps", "observed_slot"],
+      "properties": {
+        "buy_venue": {"type": "string"},
+        "sell_venue": {"type": "string"},
+        "buy_price": {"type": "number", "exclusiveMinimum": 0},
+        "sell_price": {"type": "number", "exclusiveMinimum": 0},
+        "gross_edge_bps": {"type": "number"},
+        "net_edge_bps": {"type": "number"},
+        "estimated_profit_quote": {"type": "number"},
+        "observed_slot": {"type": "integer", "minimum": 0},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+      },
+      "additionalProperties": true
+    }
+  ]
+}
