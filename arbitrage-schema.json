@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/Rish0x29/solana-dex-arbitrage-scanner/blob/main/arbitrage-schema.json",
+  "$id": "https://github.com/no-limit-nodes/SOL-dex-arbitrage-scanner/blob/main/arbitrage-schema.json",
   "title": "Solana DEX Arbitrage Data",
   "description": "Normalized DEX quotes and derived arbitrage candidates observed through NLN-connected Solana data pipelines.",
   "oneOf": [

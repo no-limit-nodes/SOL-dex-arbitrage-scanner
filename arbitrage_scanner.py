@@ -62,4 +62,5 @@ def scan_arbitrage(quotes: list[Quote], trade_size: float = 1.0, min_edge_bps: f
 def load_quotes(path: str) -> list[Quote]:
     with open(path, encoding="utf-8") as stream:
         rows = json.load(stream)
-    return [Quote(**row) for row in rows]
+    fields = set(Quote.__dataclass_fields__)
+    return [Quote(**{k: v for k, v in row.items() if k in fields}) for row in rows]

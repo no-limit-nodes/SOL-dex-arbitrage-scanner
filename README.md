@@ -121,7 +121,7 @@ python examples/arbitrage-scanner.py quotes.json --trade-size 10 --min-edge-bps 
 
 [`arbitrage-schema.json`](arbitrage-schema.json) is the machine-readable contract. It defines two shapes: a **DEX quote** (requires `venue`, `base_mint`, `quote_mint`, `bid`, `ask`, `observed_slot`; also lists optional `pool`, `fee_bps` and `source`, default `"nln-rpc"`) and an **arbitrage opportunity** (requires `buy_venue`, `sell_venue`, `net_edge_bps`, `observed_slot`; also `buy_price`, `sell_price`, `gross_edge_bps`, `estimated_profit_quote`, `confidence` from 0 to 1).
 
-> Note: the loader passes each object straight to the `Quote` dataclass, so extra keys such as `pool` or `source` raise a `TypeError`. Strip them before calling `load_quotes()`, or extend `Quote`.
+> Note: `load_quotes()` keeps only the fields the scanner uses. Extra schema fields such as `pool` and `source` are accepted and ignored.
 
 ## How the net edge is calculated
 
